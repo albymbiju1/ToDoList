@@ -41,7 +41,6 @@ if (isset($_GET['delete_task'])) {
     $conn->query($sql);
 }
 
-// Fetch Tasks
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT * FROM tasks WHERE user_id='$user_id'";
 $result = $conn->query($sql);
@@ -150,12 +149,12 @@ $result = $conn->query($sql);
 
         .task-actions {
             display: flex;
-            flex-direction: column; /* Align buttons vertically */
+            flex-direction: column; 
             width: 100%;
         }
 
         .task-actions form {
-            width: 100%; /* Ensure the update form takes full width */
+            width: 100%; 
         }
 
         .task-actions button {
@@ -166,7 +165,7 @@ $result = $conn->query($sql);
             cursor: pointer;
             transition: all 0.3s;
             text-align: center;
-            margin-top: 10px; /* Space between buttons */
+            margin-top: 10px; 
         }
 
         .task-actions .update-btn {
@@ -198,7 +197,7 @@ $result = $conn->query($sql);
             text-decoration: underline;
         }
 
-        /* Success and error message styles */
+        
         .success, .error {
             padding: 10px;
             margin-top: 15px;
