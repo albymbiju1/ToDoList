@@ -12,12 +12,20 @@ if ($conn->connect_error) {
 
 // Create Task
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_task'])) {
+    $task_name = $conn->real_escape_string($_POST['task_name']);
+    $description = $conn->real_escape_string($_POST['description']);
     $user_id = $_SESSION['user_id'];
-    $task_name = $_POST["task_name"];
-    $description = $_POST["description"];
-    $sql = "INSERT INTO tasks (user_id, task_name, description) VALUES ('$user_id', '$task_name', '$description')";
-    $conn->query($sql);
+
+    $sql = "INSERT INTO tasks (user_id, task_name, description, status) 
+            VALUES ('$user_id', '$task_name', '$description', 'pending')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "<p class='success'>Task created successfully!</p>";
+    } else {
+        echo "<p class='error'>Error: " . $conn->error . "</p>";
+    }
 }
+
 
 // Update Task
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_task'])) {
