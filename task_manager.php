@@ -1,29 +1,28 @@
 <?php
-// Start the session to access session variables
 session_start();
 
-// Ensure a valid user session exists
+
 if (!isset($_SESSION['user_id'])) {
     echo "Please log in first!";
     exit;
 }
 
-// Establish database connection
+
 $conn = new mysqli("localhost", "root", "", "todolist");
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$user_id = $_SESSION['user_id']; // Get user_id from session
+$user_id = $_SESSION['user_id']; 
 
-// Handle task creation (Create operation)
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_task'])) {
     $task_name = $_POST["task_name"];
     $task_description = $_POST["task_description"];
-    $task_status = "pending"; // Default status is pending
+    $task_status = "pending";
     
-    // Insert the task into the database
+    
     $sql = "INSERT INTO tasks (user_id, task_name, description, status) VALUES ('$user_id', '$task_name', '$task_description', '$task_status')";
     
     if ($conn->query($sql) === TRUE) {
@@ -33,14 +32,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_task'])) {
     }
 }
 
-// Handle task editing (Update operation)
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_task'])) {
     $task_id = $_POST["task_id"];
     $task_name = $_POST["task_name"];
     $task_description = $_POST["task_description"];
-    $task_status = $_POST["task_status"]; // Task status (pending or completed)
+    $task_status = $_POST["task_status"]; 
+
     
-    // Update task details in the database
     $sql = "UPDATE tasks SET task_name='$task_name', description='$task_description', status='$task_status' WHERE id='$task_id' AND user_id='$user_id'";
     
     if ($conn->query($sql) === TRUE) {
@@ -50,11 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_task'])) {
     }
 }
 
-// Handle task deletion (Delete operation)
+
 if (isset($_GET['delete_task_id'])) {
     $task_id = $_GET['delete_task_id'];
     
-    // Delete task from the database
+    
     $sql = "DELETE FROM tasks WHERE id='$task_id' AND user_id='$user_id'";
     
     if ($conn->query($sql) === TRUE) {
@@ -64,11 +63,10 @@ if (isset($_GET['delete_task_id'])) {
     }
 }
 
-// Fetch tasks for the logged-in user
 $sql = "SELECT * FROM tasks WHERE user_id = '$user_id'";
 $result = $conn->query($sql);
 
-// Show task creation form
+
 echo '<h3>Create New Task</h3>';
 echo '<form method="POST">
         <input type="text" name="task_name" placeholder="Task Name" required>
@@ -76,7 +74,6 @@ echo '<form method="POST">
         <button type="submit" name="create_task">Create Task</button>
       </form>';
 
-// Show tasks if available
 echo "<h3>Your Tasks</h3>";
 
 if ($result->num_rows > 0) {
@@ -86,10 +83,8 @@ if ($result->num_rows > 0) {
         echo "<p>" . $row["description"] . "</p>";
         echo "<p>Status: " . $row["status"] . "</p>";
         
-        // Edit link
         echo "<a href='?edit_task_id=" . $row["id"] . "'>Edit</a> | ";
         
-        // Delete link
         echo "<a href='?delete_task_id=" . $row["id"] . "'>Delete</a>";
         echo "</div>";
         
