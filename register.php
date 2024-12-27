@@ -37,26 +37,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     <title>Register</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4caf50, #81c784);
             margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            color: #333;
         }
         .container {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 300px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 350px;
+            text-align: center;
         }
         .container h2 {
+            font-size: 24px;
             margin-bottom: 20px;
-            color: #333333;
-            text-align: center;
+            color: #388e3c;
         }
         .container form {
             display: flex;
@@ -64,28 +65,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
         }
         .container input {
             margin-bottom: 15px;
-            padding: 10px;
+            padding: 12px;
+            font-size: 14px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 6px;
+            transition: border-color 0.3s;
+        }
+        .container input:focus {
+            border-color: #4caf50;
+            outline: none;
         }
         .container button {
             background-color: #4caf50;
-            color: white;
-            padding: 10px;
+            color: #fff;
+            font-size: 16px;
+            padding: 12px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
         }
         .container button:hover {
             background-color: #45a049;
+            transform: translateY(-2px);
+        }
+        .container .back-button {
+            background-color: #388e3c;
+            margin-top: 10px;
+        }
+        .container .back-button:hover {
+            background-color: #2e7d32;
         }
         .container p {
             margin-top: 15px;
-            text-align: center;
             font-size: 14px;
         }
         .container a {
             color: #4caf50;
+            font-weight: bold;
             text-decoration: none;
         }
         .container a:hover {
@@ -95,14 +112,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
 </head>
 <body>
     <div class="container">
-        <h2>Register</h2>
+        <h2>Create Your Account</h2>
         <form method="POST" action="register.php">
-            <input type="text" name="name" placeholder="Name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Create Password" required>
             <button type="submit" name="register">Register</button>
         </form>
-        <p>Already have an account? <a href="login.php">Login here</a></p>
+        <p>Already registered? <a href="login.php">Log in here</a></p>
     </div>
 </body>
 </html>
