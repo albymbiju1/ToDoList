@@ -93,7 +93,7 @@ if ($result->num_rows > 0) {
         echo "<a href='?delete_task_id=" . $row["id"] . "'>Delete</a>";
         echo "</div>";
         
-        // If editing a task, show the edit form
+       
         if (isset($_GET['edit_task_id']) && $_GET['edit_task_id'] == $row['id']) {
             ?>
             <h3>Edit Task</h3>

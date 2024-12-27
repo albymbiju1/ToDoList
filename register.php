@@ -5,25 +5,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Hash password for security
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Database connection
     $conn = new mysqli("localhost", "root", "", "todolist");
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Check if email already exists
     $sql = "SELECT * FROM users WHERE email='$email'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         echo "Email already exists. Please log in.";
     } else {
-        // Insert user into database
+        
         $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$hashed_password')";
         if ($conn->query($sql) === TRUE) {
-            // Redirect to login page after successful registration
+        
             header("Location: login.php");
             exit();
         } else {
