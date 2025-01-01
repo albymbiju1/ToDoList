@@ -109,7 +109,7 @@ Follow these instructions to set up and run the project.
 ```plaintext
 /project_directory
 │
-├── register.php      # Handles user registration
+├── index.php      # Handles user registration
 ├── login.php         # Handles user login
 ├── task_manager.php  # Main task management page
 ├── database.sql      # SQL script to create database and tables
